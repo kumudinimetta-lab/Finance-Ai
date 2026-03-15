@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance AI - Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="dashboard-page">
+    <nav class="sidebar glass-panel">
+        <div class="brand-title-small">Finance AI</div>
+        <ul class="nav-links">
+            <li class="active"><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="chat.html">AI Advisor</a></li>
+        </ul>
+        <div class="user-info">
+            <span id="user-name">User</span>
+            <button id="logout-btn" class="btn outline-btn">Logout</button>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <header>
+            <h1>Dashboard</h1>
+            <button id="add-tx-btn" class="btn primary-btn">+ Add Transaction</button>
+        </header>
+
+        <section class="summary-cards">
+            <div class="card glass-panel">
+                <h3>Total Income</h3>
+                <p id="total-income" class="amount success">$0.00</p>
+            </div>
+            <div class="card glass-panel">
+                <h3>Total Spent</h3>
+                <p id="total-spent" class="amount danger">$0.00</p>
+            </div>
+            <div class="card glass-panel">
+                <h3>Net Balance</h3>
+                <p id="net-balance" class="amount">$0.00</p>
+            </div>
+        </section>
+
+        <section class="charts-section">
+            <div class="chart-container glass-panel">
+                <h3>Spending by Category</h3>
+                <canvas id="spendingChart"></canvas>
+            </div>
+        </section>
+
+        <section class="transactions-section glass-panel">
+            <h3>Recent Transactions</h3>
+            <table id="transactions-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Description</th>
+                        <th>Category</th>
+                        <th>Amount</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="tx-body">
+                    <!-- Transactions will be populated here -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <!-- Modal for adding transaction -->
+    <div id="tx-modal" class="modal hidden">
+        <div class="modal-content glass-panel">
+            <span class="close-btn">&times;</span>
+            <h2>Add Transaction</h2>
+            <form id="tx-form">
+                <div class="input-group">
+                    <label for="tx-amount">Amount ($)</label>
+                    <input type="number" step="0.01" id="tx-amount" required>
+                </div>
+                <div class="input-group">
+                    <label for="tx-desc">Description</label>
+                    <input type="text" id="tx-desc" required>
+                </div>
+                <div class="input-group">
+                    <label for="tx-cat">Category</label>
+                    <select id="tx-cat" required>
+                        <option value="food">Food</option>
+                        <option value="transport">Transport</option>
+                        <option value="utilities">Utilities</option>
+                        <option value="entertainment">Entertainment</option>
+                        <option value="shopping">Shopping</option>
+                        <option value="health">Health</option>
+                        <option value="salary">Salary</option>
+                        <option value="investment">Investment</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn primary-btn">Add</button>
+            </form>
+            <p id="tx-error" class="error-msg hidden"></p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            initDashboard();
+        });
+    </script>
+</body>
+</html>

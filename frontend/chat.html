@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance AI - Financial Advisor</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="dashboard-page">
+    <nav class="sidebar glass-panel">
+        <div class="brand-title-small">Finance AI</div>
+        <ul class="nav-links">
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li class="active"><a href="chat.html">AI Advisor</a></li>
+        </ul>
+        <div class="user-info">
+            <span id="user-name">User</span>
+            <button id="logout-btn" class="btn outline-btn">Logout</button>
+        </div>
+    </nav>
+
+    <main class="main-content chat-layout">
+        <header>
+            <h1>AI Financial Advisor</h1>
+        </header>
+
+        <section class="chat-container glass-panel">
+            <div id="chat-messages" class="messages-area">
+                <div class="message assistant">
+                    <div class="msg-content">Hello! I'm your AI financial advisor. Based on your recent transactions, how can I help you today? You can ask about your spending habits, budget advice, or simulate financial scenarios.</div>
+                </div>
+                <!-- Messages will be appended here -->
+            </div>
+            <div class="chat-input-area">
+                <form id="chat-form">
+                    <input type="text" id="chat-input" placeholder="Ask financial questions..." required autocomplete="off">
+                    <button type="submit" id="send-btn" class="btn primary-btn">Send</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            initChat();
+        });
+    </script>
+</body>
+</html>
