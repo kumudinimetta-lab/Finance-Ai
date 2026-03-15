@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://127.0.0.1:8000/api';
+const API_BASE_URL = "https://finance-ai.onrender.com";
 
 function getToken() {
     return localStorage.getItem('token');
@@ -25,7 +25,7 @@ if (document.getElementById('login-form')) {
         e.preventDefault();
         const email = document.getElementById('login-email').value;
         const password = document.getElementById('login-password').value;
-        
+
         try {
             const formData = new URLSearchParams();
             formData.append('username', email);
@@ -37,7 +37,7 @@ if (document.getElementById('login-form')) {
                 body: formData
             });
             const data = await res.json();
-            
+
             if (res.ok) {
                 localStorage.setItem('token', data.access_token);
                 window.location.href = 'dashboard.html';
@@ -56,7 +56,7 @@ if (document.getElementById('register-form')) {
         const fullName = document.getElementById('reg-name').value;
         const email = document.getElementById('reg-email').value;
         const password = document.getElementById('reg-password').value;
-        
+
         try {
             const res = await fetch(`${API_BASE_URL}/users/register`, {
                 method: 'POST',
@@ -64,7 +64,7 @@ if (document.getElementById('register-form')) {
                 body: JSON.stringify({ email, full_name: fullName, password })
             });
             const data = await res.json();
-            
+
             if (res.ok) {
                 document.getElementById('show-login').click();
                 showAuthError("Registration successful. Please login.", "success");
@@ -98,7 +98,7 @@ async function initDashboard() {
         handleApiError(res);
         const user = await res.json();
         document.getElementById('user-name').textContent = user.full_name || user.email;
-    } catch {}
+    } catch { }
 
     document.getElementById('logout-btn').addEventListener('click', () => {
         localStorage.removeItem('token');
@@ -176,7 +176,7 @@ async function loadDashboardData() {
 function updateChart(data) {
     const ctx = document.getElementById('spendingChart');
     if (!ctx) return;
-    
+
     if (spendingChartInst) {
         spendingChartInst.destroy();
     }
@@ -211,7 +211,7 @@ function updateChart(data) {
     });
 }
 
-window.deleteTx = async function(id) {
+window.deleteTx = async function (id) {
     if (!confirm("Are you sure you want to delete this transaction?")) return;
     try {
         const res = await fetch(`${API_BASE_URL}/finance/transactions/${id}`, {
@@ -222,7 +222,7 @@ window.deleteTx = async function(id) {
         if (res.ok) {
             loadDashboardData();
         }
-    } catch(e) { console.error(e); }
+    } catch (e) { console.error(e); }
 }
 
 // Chat Functions
@@ -237,7 +237,7 @@ async function initChat() {
         handleApiError(res);
         const user = await res.json();
         document.getElementById('user-name').textContent = user.full_name || user.email;
-    } catch {}
+    } catch { }
 
     document.getElementById('logout-btn').addEventListener('click', () => {
         localStorage.removeItem('token');
@@ -266,7 +266,7 @@ async function initChat() {
             });
             handleApiError(res);
             const data = await res.json();
-            
+
             updateMessage(loadingId, data.message || "Error processing request.");
         } catch (err) {
             updateMessage(loadingId, "Connection error.");
@@ -288,14 +288,14 @@ async function initChat() {
 
     function updateMessage(id, text) {
         const el = document.getElementById(id);
-        if(el) {
+        if (el) {
             el.querySelector('.msg-content').textContent = text;
             messagesArea.scrollTop = messagesArea.scrollHeight;
         }
     }
 
     function escapeHTML(str) {
-        return str.replace(/[&<>'"]/g, 
+        return str.replace(/[&<>'"]/g,
             tag => ({
                 '&': '&amp;',
                 '<': '&lt;',
